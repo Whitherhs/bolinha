@@ -67,7 +67,7 @@ texto.setSize(24)
 texto.draw(janela)
 
 # Jogo foi aberto
-eventos.jogo_abriu()
+eventos.jogo_abriu(janela)
 
 # Loop principal
 janela.getKey()
