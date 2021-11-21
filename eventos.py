@@ -3,6 +3,7 @@
 def jogo_abriu():
     # Pode ser utilizado para posicionar elementos na tela, etc.
     print('JOGO ABRIU')
+    # Exemplo
 
 
 def loop_principal():
