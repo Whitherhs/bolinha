@@ -16,5 +16,5 @@ def nomedojogadores(janela):
     while True:
         nome.setText(nomejogador.getText())
         if len(nomejogador.getText()) > 3:
+            nomejogador.undraw()
             break
-        print("sucesso")
