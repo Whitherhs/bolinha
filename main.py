@@ -2,6 +2,7 @@ from graphics import *
 import random
 
 import eventos
+import blocos
 
 # Tela do jogo
 janela = GraphWin('Bolinha', 800, 600)
@@ -66,6 +67,9 @@ texto.setTextColor(cor_principal)
 texto.setSize(24)
 texto.draw(janela)
 
+# Blocos
+blocos_lista = blocos.desenhar_blocos(janela)
+
 # Jogo foi aberto
 eventos.jogo_abriu(janela)
 
@@ -114,6 +118,16 @@ while True:
         velocidade_bolinha_x * sentido_bolinha_x,
         velocidade_bolinha_y * sentido_bolinha_y
     )
+
+    # Colisão com blocos
+    # for bloco in blocos_lista:
+    #     lado_esquerdo_bloco = bloco.getCenter().getX() - (50 / 2)
+    #     lado_direito_bloco = bloco.getCenter().getX() + (50 / 2)
+    #     colisao_com_bloco_x = lado_esquerdo_bloco <= pos_atual_bolinha.getX() <= lado_direito_bloco
+    #     colisao_com_bloco_y = pos_atual_bolinha.getY() == bloco.getCenter().getY()
+
+    #     if colisao_com_bloco_x and colisao_com_bloco_y:
+    #         bloco.undraw()
 
     # Movimento do jogador
     tecla = janela.checkKey()
