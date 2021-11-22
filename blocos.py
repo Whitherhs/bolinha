@@ -1,6 +1,6 @@
 from graphics import *
 
-def desenhar_blocos(janela):
+def desenhar_blocos(janela, cor):
     comprimento = 50
     largura = 20
     borda = 25
@@ -25,7 +25,7 @@ def desenhar_blocos(janela):
                     j * passo_vertical + largura
                 )
             )
-            bloco.setFill('white')
+            bloco.setFill(cor)
             bloco.draw(janela)
             blocos.append(bloco)
     
