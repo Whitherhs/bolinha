@@ -19,7 +19,7 @@ centro_tela = Point(
 )
 
 def main():
-    escolha = menu.menu(janela)
+    escolha = menu.menu(janela, centro_tela)
     if escolha == 1:
         nome = jogador.tela_nome(janela, centro_tela, cor_principal, cor_secundaria)
         base.jogo_base(janela, centro_tela, cor_principal, nome)

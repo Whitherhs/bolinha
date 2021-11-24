@@ -1,15 +1,15 @@
 from graphics import *
 
-def menu(janela):
+def menu(win, centro_tela):
     lista_objetos = []
 
     escolha = 1
     escmax = 4
 
-    nome = Text(Point(400, 100), "Ball Word")
+    nome = Text(Point(centro_tela.getX(), 100), "Ball Word")
     nome.setFill("red")
     nome.setSize(36)
-    nome.draw(janela)
+    nome.draw(win)
     lista_objetos.append(nome)
 
     x = 100
@@ -17,48 +17,48 @@ def menu(janela):
 
     blocos = Rectangle(Point(x, y), Point(x + 200, y + 100))
     blocos.setFill("black")
-    blocos.draw(janela)
+    blocos.draw(win)
     lista_objetos.append(blocos)
 
     vspc = Rectangle(Point(x, y + 200), Point(x + 200, y + 300))
     vspc.setFill("black")
-    vspc.draw(janela)
+    vspc.draw(win)
     lista_objetos.append(vspc)
 
     x = 500
 
     vsps = Rectangle(Point(x, y), Point(x + 200, y + 100))
     vsps.setFill("black")
-    vsps.draw(janela)
+    vsps.draw(win)
     lista_objetos.append(vsps)
 
     rank = Rectangle(Point(x, y + 200), Point(x + 200, y + 300))
     rank.setFill("black")
-    rank.draw(janela)
+    rank.draw(win)
     lista_objetos.append(rank)
 
     text1 = Text(blocos.getCenter(), "Blocos")
     text1.setSize(15)
     text1.setFill("green")
-    text1.draw(janela)
+    text1.draw(win)
     lista_objetos.append(text1)
 
     text2 = Text(vspc.getCenter(), "VS BOT")
     text2.setSize(15)
     text2.setFill("green")
-    text2.draw(janela)
+    text2.draw(win)
     lista_objetos.append(text2)
 
     text3 = Text(vsps.getCenter(), "1 VS 1")
     text3.setSize(15)
     text3.setFill("green")
-    text3.draw(janela)
+    text3.draw(win)
     lista_objetos.append(text3)
 
     op2text = Text(rank.getCenter(), "Placar")
     op2text.setSize(15)
     op2text.setFill("green")
-    op2text.draw(janela)
+    op2text.draw(win)
     lista_objetos.append(op2text)
 
     blocosSele = Rectangle(blocos.getP1(), blocos.getP2())
@@ -82,7 +82,7 @@ def menu(janela):
     lista_objetos.append(rankSele)
 
     while True:
-        teclas = janela.checkKey()
+        teclas = win.checkKey()
 
         if teclas == "Down":
             if escolha == escmax:
@@ -99,25 +99,25 @@ def menu(janela):
             rankSele.undraw()
             vspcSele.undraw()
             blocosSele.undraw()
-            blocosSele.draw(janela)
+            blocosSele.draw(win)
 
         if escolha == 2:
             vspsSele.undraw()
             blocosSele.undraw()
             vspcSele.undraw()
-            vspcSele.draw(janela)
+            vspcSele.draw(win)
 
         if escolha == 3:
             rankSele.undraw()
             vspcSele.undraw()
             vspsSele.undraw()
-            vspsSele.draw(janela)
+            vspsSele.draw(win)
 
         if escolha == 4:
             vspsSele.undraw()
             blocosSele.undraw()
             rankSele.undraw()
-            rankSele.draw(janela)
+            rankSele.draw(win)
 
         if teclas == "Return":
             if escolha == 1:
