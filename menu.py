@@ -136,7 +136,11 @@ def menu(win, centro_tela):
         if teclas == "Escape":
             break
 
+
+
+
         update(60)
+
 
     for objeto in lista_objetos:
         objeto.undraw()

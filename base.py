@@ -4,6 +4,7 @@ import random
 import eventos
 import blocos
 
+
 def jogo_base(janela, centro_tela, cor_principal, nome):
     # Variáveis de configuração da bolinha
     # X = horizontal, Y = vertical
@@ -192,7 +193,7 @@ def jogo_base(janela, centro_tela, cor_principal, nome):
             texto_principal.draw(janela)
             eventos.jogador_venceu()
             break
-
+        #chamar função pegar nome...
         update(velocidade_jogo)
 
     janela.getMouse()

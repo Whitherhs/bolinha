@@ -23,6 +23,7 @@ def main():
     if escolha == 1:
         nome = jogador.tela_nome(janela, centro_tela, cor_principal, cor_secundaria)
         base.jogo_base(janela, centro_tela, cor_principal, nome)
+
     else:
         texto = Text(Point(centro_tela.getX(), centro_tela.getY()), 'Não implementado')
         texto.setSize(24)

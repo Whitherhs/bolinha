@@ -25,5 +25,9 @@ def tela_nome(janela, centro_tela, cor_principal, cor_secundaria):
             return nome
         update(60)
 
-def pegar_nome():
+def pegar_nome(nome, pontos):
+    f = open("placar.txt", "w+")
+    f.write(f"{nome}, {pontos}, \n")
+    f.close()
+
     return nome
