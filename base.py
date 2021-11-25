@@ -4,7 +4,8 @@ import random
 import eventos
 import blocos
 
-def jogo_base(janela, centro_tela, cor_principal, nome):
+
+def jogo_base(janela, centro_tela, cor_principal, nome, modo_com_vida):
     # Variáveis de configuração da bolinha
     # X = horizontal, Y = vertical
     raio_bolinha = 15
@@ -12,12 +13,12 @@ def jogo_base(janela, centro_tela, cor_principal, nome):
     #numero de vidas
     vida = 3
     #imprime os coraçoes
-    coraçao1 = Image(Point(60, 14), "coraçao.png")
-    coraçao1.draw(janela)
-    coraçao2 = Image(Point(80, 14), "coraçao.png")
-    coraçao2.draw(janela)
-    coraçao3 = Image(Point(100, 14), "coraçao.png")
-    coraçao3.draw(janela)
+    coracao1 = Image(Point(60, 14), "coraçao.png")
+    coracao1.draw(janela)
+    coracao2 = Image(Point(80, 14), "coraçao.png")
+    coracao2.draw(janela)
+    coracao3 = Image(Point(100, 14), "coraçao.png")
+    coracao3.draw(janela)
     
     pos_inicial_bolinha = Point(
         centro_tela.getX(),
@@ -150,9 +151,9 @@ def jogo_base(janela, centro_tela, cor_principal, nome):
                     if vida > 1:
                         vida -= 1
                         if vida == 2:
-                            coraçao3.undraw()
+                            coracao3.undraw()
                         elif vida == 1:
-                            coraçao2.undraw()
+                            coracao2.undraw()
                         bolinha.undraw()
                         for i in range(2, 0, -1):
                             texto_principal.undraw()
@@ -169,7 +170,7 @@ def jogo_base(janela, centro_tela, cor_principal, nome):
                         sentido_bolinha_y = -1
 
                     elif vida == 1:
-                        coraçao1.undraw()
+                        coracao1.undraw()
                         texto_principal.setText(f'FIM DE JOGO\n\nVocê marcou {pontos} pontos.')
                         texto_principal.draw(janela)
                         eventos.fim_de_jogo()
