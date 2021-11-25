@@ -16,24 +16,24 @@ def menu(win, centro_tela):
     y = 200
 
     blocos = Rectangle(Point(x, y), Point(x + 200, y + 100))
-    blocos.setFill("black")
+    blocos.setFill("gray")
     blocos.draw(win)
     lista_objetos.append(blocos)
 
     vspc = Rectangle(Point(x, y + 200), Point(x + 200, y + 300))
-    vspc.setFill("black")
+    vspc.setFill("gray")
     vspc.draw(win)
     lista_objetos.append(vspc)
 
     x = 500
 
     vsps = Rectangle(Point(x, y), Point(x + 200, y + 100))
-    vsps.setFill("black")
+    vsps.setFill("gray")
     vsps.draw(win)
     lista_objetos.append(vsps)
 
     rank = Rectangle(Point(x, y + 200), Point(x + 200, y + 300))
-    rank.setFill("black")
+    rank.setFill("gray")
     rank.draw(win)
     lista_objetos.append(rank)
 
@@ -135,12 +135,7 @@ def menu(win, centro_tela):
 
         if teclas == "Escape":
             break
-
-
-
-
         update(60)
-
 
     for objeto in lista_objetos:
         objeto.undraw()
