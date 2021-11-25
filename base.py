@@ -5,7 +5,8 @@ import eventos
 import blocos
 
 
-def jogo_base(janela, centro_tela, cor_principal, nome, modo_com_vida):
+
+def jogo_base(janela, centro_tela, cor_principal, nome, modo_com_vida ):
     # Variáveis de configuração da bolinha
     # X = horizontal, Y = vertical
     raio_bolinha = 15
@@ -233,7 +234,9 @@ def jogo_base(janela, centro_tela, cor_principal, nome, modo_com_vida):
             texto_principal.draw(janela)
             eventos.jogador_venceu()
             break
-        #chamar função pegar nome...
+
+
+
         update(velocidade_jogo)
 
     janela.getMouse()

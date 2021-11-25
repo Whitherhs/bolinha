@@ -24,8 +24,9 @@ def main():
         #para ativar o sistema de vida
         modo_com_vida = True
 
+
         nome = jogador.tela_nome(janela, centro_tela, cor_principal, cor_secundaria)
-        base.jogo_base(janela, centro_tela, cor_principal, nome, modo_com_vida)
+        base.jogo_base(janela, centro_tela, cor_principal, nome, modo_com_vida )
 
     else:
         texto = Text(Point(centro_tela.getX(), centro_tela.getY()), 'Não implementado')
