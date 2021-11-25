@@ -21,8 +21,11 @@ centro_tela = Point(
 def main():
     escolha = menu.menu(janela, centro_tela)
     if escolha == 1:
+        #para ativar o sistema de vida
+        modo_com_vida = True
+
         nome = jogador.tela_nome(janela, centro_tela, cor_principal, cor_secundaria)
-        base.jogo_base(janela, centro_tela, cor_principal, nome)
+        base.jogo_base(janela, centro_tela, cor_principal, nome, modo_com_vida)
 
     else:
         texto = Text(Point(centro_tela.getX(), centro_tela.getY()), 'Não implementado')
