@@ -4,12 +4,21 @@ import random
 import eventos
 import blocos
 
-
 def jogo_base(janela, centro_tela, cor_principal, nome):
     # Variáveis de configuração da bolinha
     # X = horizontal, Y = vertical
     raio_bolinha = 15
-
+    
+    #numero de vidas
+    vida = 3
+    #imprime os coraçoes
+    coraçao1 = Image(Point(60, 14), "coraçao.png")
+    coraçao1.draw(janela)
+    coraçao2 = Image(Point(80, 14), "coraçao.png")
+    coraçao2.draw(janela)
+    coraçao3 = Image(Point(100, 14), "coraçao.png")
+    coraçao3.draw(janela)
+    
     pos_inicial_bolinha = Point(
         centro_tela.getX(),
         centro_tela.getY() / 3 * 4
@@ -137,10 +146,40 @@ def jogo_base(janela, centro_tela, cor_principal, nome):
 
             elif colisao_com_jogador_y and not colisao_com_jogador_x:
                 # Fim de jogo
-                texto_principal.setText(f'FIM DE JOGO\n\nVocê marcou {pontos} pontos.')
-                texto_principal.draw(janela)
-                eventos.fim_de_jogo()
-                break
+                if modo_com_vida == True:
+                    if vida > 1:
+                        vida -= 1
+                        if vida == 2:
+                            coraçao3.undraw()
+                        elif vida == 1:
+                            coraçao2.undraw()
+                        bolinha.undraw()
+                        for i in range(2, 0, -1):
+                            texto_principal.undraw()
+                            texto_principal.setText(i)
+                            texto_principal.draw(janela)
+                            time.sleep(1)
+                        texto_principal.undraw()
+                        bolinha = Circle(pos_inicial_bolinha, raio_bolinha)
+                        bolinha.setFill(cor_principal)
+                        bolinha.draw(janela)
+                        velocidade_bolinha_x = 3
+                        velocidade_bolinha_y = 4
+                        sentido_bolinha_x = 0
+                        sentido_bolinha_y = -1
+
+                    elif vida == 1:
+                        coraçao1.undraw()
+                        texto_principal.setText(f'FIM DE JOGO\n\nVocê marcou {pontos} pontos.')
+                        texto_principal.draw(janela)
+                        eventos.fim_de_jogo()
+                        break
+                else:
+                    texto_principal.setText(f'FIM DE JOGO\n\nVocê marcou {pontos} pontos.')
+                    texto_principal.draw(janela)
+                    eventos.fim_de_jogo()
+                    break
+                    
 
             sentido_bolinha_y *= -1
 
