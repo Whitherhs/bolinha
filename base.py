@@ -228,7 +228,9 @@ def jogo_base(janela, centro_tela, cor_principal, nome):
             texto_principal.draw(janela)
             eventos.jogador_venceu(nome, pontos)
             break
-        #chamar função pegar nome...
+
+
+
         update(velocidade_jogo)
 
     janela.getMouse()
