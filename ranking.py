@@ -2,13 +2,13 @@ from graphics import *
 
 
 def gravar_entrada(nome, pontos):
-    f = open('ranking.txt', 'a')
+    f = open('placar.txt', 'a')
     f.write(f'{nome}, {pontos}\n')
     f.close()
 
 
 def ler_entradas():
-    f = open('ranking.txt', 'r')
+    f = open('placar.txt', 'r')
     ranking = f.readlines()
     f.close()
 
