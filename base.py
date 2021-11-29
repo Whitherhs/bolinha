@@ -5,31 +5,27 @@ import eventos
 import blocos
 
 
-def jogo_base(janela, centro_tela, cor_principal, nome, modo_com_vida):
+def jogo_base(janela, centro_tela, cor_principal, nome):
     # Variáveis de configuração da bolinha
     # X = horizontal, Y = vertical
     raio_bolinha = 15
-    
-    #numero de vidas
-    vida = 3
-    #imprime os coraçoes
-    coracao1 = Image(Point(60, 14), "coraçao.png")
-    coracao1.draw(janela)
-    coracao2 = Image(Point(80, 14), "coraçao.png")
-    coracao2.draw(janela)
-    coracao3 = Image(Point(100, 14), "coraçao.png")
-    coracao3.draw(janela)
     
     pos_inicial_bolinha = Point(
         centro_tela.getX(),
         centro_tela.getY() / 3 * 4
     )
 
-    velocidade_bolinha_x = 3
-    velocidade_bolinha_y = 4
+    velocidade_inicial_bolinha_x = 3
+    velocidade_inicial_bolinha_y = 4
 
-    sentido_bolinha_x = 0
-    sentido_bolinha_y = 1
+    velocidade_bolinha_x = velocidade_inicial_bolinha_x
+    velocidade_bolinha_y = velocidade_inicial_bolinha_y
+    
+    sentido_inicial_bolinha_x = 0
+    sentido_inicial_bolinha_y = 1
+
+    sentido_bolinha_x = sentido_inicial_bolinha_x
+    sentido_bolinha_y = sentido_inicial_bolinha_y
 
     # Variáveis de configuração do jogador (barra)
     comprimento_jogador = 150
@@ -45,6 +41,7 @@ def jogo_base(janela, centro_tela, cor_principal, nome, modo_com_vida):
     # Variáveis de configuração do jogo
     velocidade_jogo = 60
     pontos = 0
+    vidas = 3
     altura_barra_superior = 30
 
     # Bolinha
@@ -93,16 +90,16 @@ def jogo_base(janela, centro_tela, cor_principal, nome, modo_com_vida):
     texto_pontos.setSize(12)
     texto_pontos.draw(janela)
 
-    texto_dificuldade = Text(
-        Point(janela.getWidth() - 30, 15),
-        'Fácil'
-    )
-    texto_dificuldade.setTextColor(cor_principal)
-    texto_dificuldade.setSize(12)
-    texto_dificuldade.draw(janela)
-
     # Blocos
     blocos_lista = blocos.desenhar_blocos(janela, cor_principal)
+
+    # Corações
+    coracoes = []
+    pos_inicial_coracoes = janela.getWidth() - (16 * vidas + 15)
+    for i in range(vidas):
+        coracao = Image(Point(pos_inicial_coracoes + i * 20, 15), './img/coração.png')
+        coracao.draw(janela)
+        coracoes.append(coracao)
 
     # Jogo foi aberto
     eventos.jogo_abriu(janela)
@@ -110,12 +107,7 @@ def jogo_base(janela, centro_tela, cor_principal, nome, modo_com_vida):
     # Loop principal
     janela.getKey()
 
-    for i in range(3, 0, -1):
-        texto_principal.setText(i)
-        time.sleep(1)
-    texto_principal.setText('BOM JOGO!')
-    time.sleep(1)
-
+    contagem(texto_principal)
     texto_principal.undraw()
 
     while True:
@@ -147,40 +139,43 @@ def jogo_base(janela, centro_tela, cor_principal, nome, modo_com_vida):
 
             elif colisao_com_jogador_y and not colisao_com_jogador_x:
                 # Fim de jogo
-                if modo_com_vida == True:
-                    if vida > 1:
-                        vida -= 1
-                        if vida == 2:
-                            coracao3.undraw()
-                        elif vida == 1:
-                            coracao2.undraw()
-                        bolinha.undraw()
-                        for i in range(2, 0, -1):
-                            texto_principal.undraw()
-                            texto_principal.setText(i)
-                            texto_principal.draw(janela)
-                            time.sleep(1)
-                        texto_principal.undraw()
-                        bolinha = Circle(pos_inicial_bolinha, raio_bolinha)
-                        bolinha.setFill(cor_principal)
-                        bolinha.draw(janela)
-                        velocidade_bolinha_x = 3
-                        velocidade_bolinha_y = 4
-                        sentido_bolinha_x = 0
-                        sentido_bolinha_y = -1
+                vidas -= 1
 
-                    elif vida == 1:
-                        coracao1.undraw()
-                        texto_principal.setText(f'FIM DE JOGO\n\nVocê marcou {pontos} pontos.')
-                        texto_principal.draw(janela)
-                        eventos.fim_de_jogo()
-                        break
+                coracoes[-1].undraw()
+                coracoes.pop()
+
+                if vidas > 0:
+                    bolinha.undraw()
+                    bolinha = Circle(pos_inicial_bolinha, raio_bolinha)
+                    bolinha.setFill(cor_principal)
+                    bolinha.draw(janela)
+
+                    jogador.undraw()
+                    jogador = Line(pos_inicial_jogador, Point(
+                        pos_inicial_jogador.getX() + comprimento_jogador,
+                        pos_inicial_jogador.getY())
+                    )
+                    jogador.setFill(cor_principal)
+                    jogador.setWidth(largura_jogador)
+                    jogador.draw(janela)
+
+                    velocidade_bolinha_x = velocidade_inicial_bolinha_x
+                    velocidade_bolinha_y = velocidade_inicial_bolinha_y
+
+                    sentido_bolinha_x = sentido_inicial_bolinha_x
+                    sentido_bolinha_y = sentido_inicial_bolinha_y
+
+                    texto_principal.draw(janela)
+                    texto_principal.setText('Tente novamente!')
+                    time.sleep(1)
+                    contagem(texto_principal)
+                    texto_principal.undraw()
+
                 else:
                     texto_principal.setText(f'FIM DE JOGO\n\nVocê marcou {pontos} pontos.')
                     texto_principal.draw(janela)
-                    eventos.fim_de_jogo()
-                    break
-                    
+                    eventos.fim_de_jogo(nome, pontos)
+                    break    
 
             sentido_bolinha_y *= -1
 
@@ -231,10 +226,17 @@ def jogo_base(janela, centro_tela, cor_principal, nome, modo_com_vida):
         if blocos_lista.count('') == len(blocos_lista) and blocos_lista:
             texto_principal.setText(f'Parabéns {nome}, você venceu! :)\nPontos: {pontos}')
             texto_principal.draw(janela)
-            eventos.jogador_venceu()
+            eventos.jogador_venceu(nome, pontos)
             break
         #chamar função pegar nome...
         update(velocidade_jogo)
 
     janela.getMouse()
     janela.close()
+
+def contagem(texto):
+    for i in range(3, 0, -1):
+        texto.setText(i)
+        time.sleep(1)
+    texto.setText('BOM JOGO!')
+    time.sleep(1)

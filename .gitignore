@@ -128,8 +128,11 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# vscode
+# Vscode
 .vscode
 
-# pycharm
+# Pycharm
 .idea
+
+# Arquivos do jogo
+ranking.txt

@@ -134,6 +134,7 @@ def menu(win, centro_tela):
                 break
 
         if teclas == "Escape":
+            win.close()
             break
         update(60)
 
