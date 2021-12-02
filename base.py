@@ -3,6 +3,7 @@ import random
 
 import eventos
 import blocos
+import som
 
 
 def jogo_base(janela, centro_tela, cor_principal, nome):
@@ -125,10 +126,12 @@ def jogo_base(janela, centro_tela, cor_principal, nome):
         # Movimento da bolinha
         if pos_atual_bolinha.getX() <= 0 or pos_atual_bolinha.getX() >= janela.getWidth():
             # Bolinha bateu no lado direito ou esquerdo da tela
+            som.som_colisao()
             sentido_bolinha_x *= -1
 
         if pos_atual_bolinha.getY() <= altura_barra_superior or pos_atual_bolinha.getY() >= pos_atual_jogador.getY():
             # Bolinha bateu no lado inferior ou superior da tela
+            som.som_colisao()
             if colisao_com_jogador_x and colisao_com_jogador_y:
                 # Colisão entre bolinha e jogador
                 velocidade_bolinha_y = 4 + (random.randrange(1, pontos + 2) / 10)
@@ -163,7 +166,7 @@ def jogo_base(janela, centro_tela, cor_principal, nome):
                     velocidade_bolinha_y = velocidade_inicial_bolinha_y
 
                     sentido_bolinha_x = sentido_inicial_bolinha_x
-                    sentido_bolinha_y = sentido_inicial_bolinha_y
+                    sentido_bolinha_y = sentido_inicial_bolinha_y * -1
 
                     texto_principal.draw(janela)
                     texto_principal.setText('Tente novamente!')
@@ -204,6 +207,7 @@ def jogo_base(janela, centro_tela, cor_principal, nome):
                         pontos += 1
                         sentido_bolinha_y *= -1
                         eventos.colisao_bola_bloco(janela, blocos_lista[i])
+                        som.som_colisao()
 
         # Movimento do jogador
         tecla = janela.checkKey()

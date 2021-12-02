@@ -1,5 +1,6 @@
 from graphics import *
 
+import som
 
 nome = ''
 
@@ -18,6 +19,11 @@ def tela_nome(janela, centro_tela, cor_principal, cor_secundaria):
     nomejogador.draw(janela)
 
     while True:
+        teclas = janela.checkKey()
+
+        if teclas:
+            som.som_menu()
+
         nome = nomejogador.getText().upper()
         if len(nomejogador.getText()) >= 3:
             mensagem.undraw()

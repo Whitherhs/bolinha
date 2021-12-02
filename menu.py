@@ -1,5 +1,7 @@
 from graphics import *
 
+import som
+
 def menu(win, centro_tela):
     lista_objetos = []
 
@@ -85,11 +87,13 @@ def menu(win, centro_tela):
         teclas = win.checkKey()
 
         if teclas == "Down":
+            som.som_menu()
             if escolha == escmax:
                 escolha = 1
             else:
                 escolha += 1
         if teclas == "Up":
+            som.som_menu()
             if escolha == 1:
                 escolha = escmax
             else:
@@ -120,6 +124,7 @@ def menu(win, centro_tela):
             rankSele.draw(win)
 
         if teclas == "Return":
+            som.som_menu()
             if escolha == 1:
                 print("1")
                 break
